@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:replace="base :: SecurityHead"></th:block>
+
+    <title>Home</title>
+</head>
+<body>
+<th:block th:replace="base :: SecurityNav"></th:block>
+<h2>It worked!</h2>
+<div sec:authorize="isAuthenticated()">
+    This content is only shown to authenticated users.
+</div>
+<div sec:authorize="hasAuthority('ADMIN')">
+    This content is only shown to administrators.
+</div>
+<div sec:authorize="hasAuthority('USER')">
+    This content is only shown to users.
+</div>
+
+Logged user: <span sec:authentication="name"> The user is not logged in yet</span>
+<!--Roles: <span sec:authentication="principal.authorities">Principal Authorities not set</span>-->
+
+<th:block th:replace="base :: SecurityJS"></th:block>
+</body>
+</html>
